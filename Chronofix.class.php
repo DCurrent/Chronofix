@@ -8,7 +8,7 @@ interface iChronofix
 	function get_time();									// Get date/time value.
 	function is_valid($value);								// Evaluates current date time string against current format. True of valid, false otherwise.
 	function sanitize();									// Validate current date/time and replace it with string in current format.
-	function set_settings(Config $value);							// Set the settings object.
+	function set_settings(Config $value);		// Set the settings object.
 	function set_time($value);								// Set the date/time value.
 }
 
@@ -78,7 +78,7 @@ class Chronofix implements iChronofix
 			// it is a valid date, pass on as a result.
 			if($this->is_valid($time_str))
 			{				
-				$obj_date = new DateTime($time_str);
+				$obj_date = new \DateTime($time_str);
 			
 				$result = $obj_date->format($this->settings->get_format());
 			}
@@ -98,7 +98,7 @@ class Chronofix implements iChronofix
 	
 		// Create a date object from date
 		// string based on format.						
-		$date = DateTime::createFromFormat($this->settings->get_format(), $value);
+		$date = \DateTime::createFromFormat($this->settings->get_format(), $value);
 		
 		// Date object valid?
 		if($date)
